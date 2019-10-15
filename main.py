@@ -16,6 +16,13 @@ from pidev.Joystick import Joystick
 from threading import Thread
 from time import sleep
 
+import spidev
+import os
+from time import sleep
+import RPi.GPIO as GPIO
+from pidev.stepper import stepper
+spi = spidev.SpiDev()
+
 
 MIXPANEL_TOKEN = "x"
 MIXPANEL = MixPanel("Project Name", MIXPANEL_TOKEN)
@@ -39,8 +46,8 @@ class ProjectNameGUI(App):
 
 
 Window.clearcolor = (1, 1, 1, 1)  # White
-
-jstick = Joystick(number=0,ssh_deploy=False)
+s0 = stepper(port=0, micro_steps=32, hold_current=20, run_current=20, accel_current=20, deaccel_current=20,
+             steps_per_unit=200, speed=8)
 
 
 class ImageScreen(Screen):
@@ -53,6 +60,9 @@ class MainScreen(Screen):
     """
     Class to handle the main screen and its associated touch events
     """
+    def runMotor(self):
+        #runMotor just simply runs the motor if it is ready to go
+        s0.run(0, 50)
 
     def joy_update(self):
         while True:
@@ -73,8 +83,8 @@ class MainScreen(Screen):
 
 
 
-    def start_joy_thread(self):
-        Thread(target=self.joy_update).start()
+   # def start_joy_thread(self):
+    #    Thread(target=self.joy_update).start()
 
     def switch(self, curr):
         if curr == "on":
