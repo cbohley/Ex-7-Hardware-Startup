@@ -32,6 +32,7 @@ MAIN_SCREEN_NAME = 'main'
 ADMIN_SCREEN_NAME = 'admin'
 
 
+
 class ProjectNameGUI(App):
     """
     Class to handle running the GUI Application
@@ -49,6 +50,7 @@ Window.clearcolor = (1, 1, 1, 1)  # White
 s0 = stepper(port=0, micro_steps=32, hold_current=20, run_current=20, accel_current=20, deaccel_current=20,
              steps_per_unit=200, speed=8)
 
+ifMotorOn=False
 
 class ImageScreen(Screen):
     def ret(self, widg):
@@ -61,8 +63,13 @@ class MainScreen(Screen):
     Class to handle the main screen and its associated touch events
     """
     def runMotor(self):
+        if (ifMotorOn == True):
+            s0.free()
+            ifMotorOn = False
         #runMotor just simply runs the motor if it is ready to go
-        s0.run(0, 50)
+        if (ifMotorOn == False):
+            s0.run(0, 50)
+            ifMotorOn = True
 
     def joy_update(self):
         while True:
