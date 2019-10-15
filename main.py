@@ -57,20 +57,20 @@ class ImageScreen(Screen):
         anim = Animation(size=(400, 400)) + Animation(size=(80, 80))
         anim.start(widg)
         SCREEN_MANAGER.current = MAIN_SCREEN_NAME
-
+ifMotorOn = False
 class MainScreen(Screen):
     """
     Class to handle the main screen and its associated touch events
     """
 
     def runMotor(self):
-        ifMotorOn = False
-        if (ifMotorOn == True):
+        global ifMotorOn
+        if ifMotorOn == True:
             s0.stop()
             s0.free()
             ifMotorOn = False
         #runMotor just simply runs the motor if it is ready to go
-        if (ifMotorOn == False):
+        else:
             s0.run(0, 50)
             ifMotorOn = True
 
