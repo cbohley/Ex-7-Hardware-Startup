@@ -67,16 +67,12 @@ class MainScreen(Screen):
     def joy_update(self):
         while True:
             joy_x_val = jstick.get_axis('x')
-            joy_y_val = jstick.get_axis('y')
             button_state = str(jstick.get_button_state(0))
-            all_buttons_state = False
-            for i in range(11):
-                if jstick.get_button_state(i) == 1:
-                    all_buttons_state = True
-                    break
+            if jstick.get_button_state(i) == 1:
+                all_buttons_state = True
+                break
             self.ids.all_butts_label.text = str(all_buttons_state)
             self.ids.joystick_label.text = button_state
-            self.ids.joy_pos_label.center_x = self.width * 0.5 * (1 + joy_x_val)
             self.ids.joy_pos_label.center_y = self.height * -0.5 * (joy_y_val - 1)
             self.ids.coords.text = "{:.3f} {:.3f}".format(jstick.get_axis('x'), jstick.get_axis('y'))
             sleep(.1)
@@ -164,6 +160,9 @@ class AdminScreen(Screen):
         Quit the program. This should free all steppers and do any cleanup necessary
         :return: None
         """
+        s0.free_all()
+        spi.close()
+        GPIO.cleanup()
         quit()
 """
 Widget additions
