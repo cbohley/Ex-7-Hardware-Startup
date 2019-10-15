@@ -1,0 +1,120 @@
+<MainScreen>:
+    name: 'main'
+    on_enter: root.start_joy_thread()
+    FloatLayout:
+        size_hint: None, None
+
+    Slider:
+        id: slider
+        min: 0
+        max: 100
+        size_hint: 0.5, None
+        step: 1
+        size: 400, 30
+        center_y: 1000
+        font_size: 20
+        orientation: 'horizontal'
+
+    DPEAButton:
+        id: motor_button
+        text: "motor"
+        size: 100, 100
+        x: root.width * 0.25
+        y:root.height * 0.5
+        color: 1, 0, 0, 1
+        on_press: motor_label.text = root.motor_switch(motor_label.text)
+
+    Label:
+        id: motor_label
+        size_hint: None, None
+        text: "motor on"
+        font_size: 20
+        center_x: 0.4 * root.width
+        center_y: 0.4 * root.height
+        color: 1, 1, 1, 1
+        outline_width: self.font_size * 0.1
+        outline_color: 0, 0, 0
+
+    DPEAButton:
+        id: toggle_button
+        text: "on"
+        size: 100, 100
+        x: 0.5 * root.width
+        y: 0.5 * root.height
+        color: 1,0, 0, 1
+        on_press: self.text = root.switch(self.text)
+
+    DPEAButton:
+        id: counter_button
+        text: "0"
+        size: 100, 100
+        x: 0.5 * root.width
+        y: 0.25 * root.height
+        color: 0, 0, 1, 1
+        on_press: self.text = root.count(self.text)
+
+    Label:
+        id: joy_pos_label
+        text: "joy pos"
+        size_hint: None, None
+        font_size: 20
+        color: 1, 1, 1, 1
+        bold: True
+        outline_width: self.font_size * 0.1
+        outline_color: 0, 0, 0
+
+    Label:
+        id: all_butts_label
+        size_hint: None, None
+        font_size: 20
+        center_x: 0.9 * root.width
+        center_y: 0.5 * root.height
+        color: 1, 1, 1, 1
+        bold: True
+        outline_width: self.font_size * 0.1
+        outline_color: 0, 0, 0
+
+    Label:
+        id: joystick_label
+        size_hint: None, None
+        font_size: 20
+        center_x: 0.5 * root.width
+        center_y: 0.45 * root.height
+        color: 1, 1, 1, 1
+        bold: True
+        outline_width: self.font_size * 0.1
+        outline_color: 0, 0, 0
+
+    DPEAButton:
+        id: testbutton
+        text: str(int(slider.value))
+        size: 100, 100
+        x: root.width * 0.75
+        y: root.height * 0.5
+        color: 0, 1, 0, 1
+        on_press: root.pressed()
+
+    ImageButton:
+        id: BerkeleyButton
+        source: "/home/cooperbohley/Pictures/logoucberkeley.png"
+        size: 300, 100
+        x: root.width * 0.6
+        y: root.height * 0.75
+        on_press: root.exit(self)
+
+    Label:
+        id: coords
+        size: 100,100
+        color: 1,0,0,1
+        step: .1
+        center_x: 0.5 * root.width
+        center_y: -0.2 * root.height
+
+<ImageScreen>:
+    ImageButton:
+        id: HarvardButton
+        source: "/home/cooperbohley/Pictures/HarvardshieldUniversity.png"
+        size: 90, 100
+        x: root.width * 0.5
+        y: root.height * 0.5
+        on_press: root.ret(self)
