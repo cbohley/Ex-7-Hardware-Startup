@@ -58,6 +58,9 @@ class ImageScreen(Screen):
         anim.start(widg)
         SCREEN_MANAGER.current = MAIN_SCREEN_NAME
 ifMotorOn = False
+bigBrain = 0
+ultraBrain = 0.0
+
 class MainScreen(Screen):
     """
     Class to handle the main screen and its associated touch events
@@ -65,14 +68,34 @@ class MainScreen(Screen):
 
     def runMotor(self):
         global ifMotorOn
+        global bigBrain
         if ifMotorOn == True:
             s0.stop()
             s0.free()
             ifMotorOn = False
         #runMotor just simply runs the motor if it is ready to go
         else:
-            s0.run(0, 50)
+            s0.run(bigBrain, self.ids.slider.value*2.55)
             ifMotorOn = True
+
+    def changeDirection(self):
+        global ifMotorOn
+        global bigBrain
+        if ifMotorOn:
+            if bigBrain == 0:
+                bigBrain = 1
+                s0.run(bigBrain, self.ids.slider.value*2.55)
+            else:
+                bigBrain = 0
+                s0.run(bigBrain, self.ids.slider.value*2.55)
+
+    def sliderMotorSpeed(self):
+        global ultraBrain
+        global ifMotorOn
+        global bigBrain
+        if ifMotorOn:
+            s0.run(bigBrain, self.ids.slider.value*2.55)
+
 
     def joy_update(self):
         while True:

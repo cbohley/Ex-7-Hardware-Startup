@@ -13,6 +13,7 @@
         center_y: 1000
         font_size: 20
         orientation: 'horizontal'
+        on_touch_move: root.sliderMotorSpeed()
 
     DPEAButton:
         id: motor_button
@@ -43,4 +44,13 @@
         y: 0.5 * root.height
         color: 1,0, 0, 1
         on_press: self.text = root.switch(self.text)
+        on_press: root.changeDirection()
 
+    DPEAButton:
+        id: testbutton
+        text: str(int(slider.value))
+        size: 100, 100
+        x: root.width * 0.75
+        y: root.height * 0.5
+        color: 0, 1, 0, 1
+        on_press: root.pressed()
