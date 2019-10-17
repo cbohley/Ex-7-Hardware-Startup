@@ -95,22 +95,6 @@ class MainScreen(Screen):
         if ifMotorOn:
             s0.run(bigBrain, self.ids.slider.value * 5)
 
-    def joy_update(self):
-        while True:
-            joy_x_val = jstick.get_axis('x')
-            button_state = str(jstick.get_button_state(0))
-            if jstick.get_button_state(i) == 1:
-                all_buttons_state = True
-                break
-            self.ids.all_butts_label.text = str(all_buttons_state)
-            self.ids.joystick_label.text = button_state
-            self.ids.joy_pos_label.center_y = self.height * -0.5 * (joy_y_val - 1)
-            self.ids.coords.text = "{:.3f} {:.3f}".format(jstick.get_axis('x'), jstick.get_axis('y'))
-            sleep(.1)
-
-    # def start_joy_thread(self):
-    #    Thread(target=self.joy_update).start()
-
     def switch(self, curr):
         if curr == "on":
             return "off"
@@ -134,14 +118,30 @@ class MainScreen(Screen):
         """
         PauseScreen.pause(pause_scene_name='pauseScene', transition_back_scene='main', text="Test", pause_duration=5)
 
-    def bestFunction(self):
+    def ultraLabelUp(self):
+        while True:
+            self.ids.motPosLabel = s0.get_position_in_units()
 
+    def start_ultra_thread(self):
+        Thread(target=self.ultraLabelUp()).start()
+
+    def bestFunction(self):
         s0.set_speed(1)
         s0.relative_move(-15)
         s0.stop()
         sleep(10)
         s0.set_speed(5)
         s0.relative_move(-10)
+        s0.stop()
+        sleep(8)
+        s0.goHome()
+        s0.stop()
+        sleep(30)
+        s0.set_speed(8)
+        s0.relative_move(100)
+        s0.stop()
+        sleep(8)
+        s0.goHome()
 
     def admin_action(self):
         """

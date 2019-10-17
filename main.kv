@@ -1,5 +1,6 @@
 <MainScreen>:
     name: 'main'
+    on_enter: root.start_ultra_thread()
     FloatLayout:
         size_hint: None, None
 
@@ -58,10 +59,10 @@
     Label:
         id: motPosLabel
         size_hint: None, None
-        text: " "
+        text: "This is the Label!"
         font_size: 20
-        center_x: 0.4 * root.width
-        center_y: 0.4 * root.height
+        center_x: 0.5 * root.width
+        center_y: 0.25 * root.height
         color: 1, 1, 1, 1
         outline_width: self.font_size * 0.1
-        outline_color: 0, 0, 0
+        outline_color: 0, 0, 0,0
