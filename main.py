@@ -75,7 +75,7 @@ class MainScreen(Screen):
             ifMotorOn = False
         #runMotor just simply runs the motor if it is ready to go
         else:
-            s0.run(bigBrain, self.ids.slider.value*2.55)
+            s0.run(bigBrain, self.ids.slider.value*5)
             ifMotorOn = True
 
     def changeDirection(self):
@@ -84,17 +84,17 @@ class MainScreen(Screen):
         if ifMotorOn:
             if bigBrain == 0:
                 bigBrain = 1
-                s0.run(bigBrain, self.ids.slider.value*2.55)
+                s0.run(bigBrain, self.ids.slider.value*5)
             else:
                 bigBrain = 0
-                s0.run(bigBrain, self.ids.slider.value*2.55)
+                s0.run(bigBrain, self.ids.slider.value*5)
 
     def sliderMotorSpeed(self):
         global ultraBrain
         global ifMotorOn
         global bigBrain
         if ifMotorOn:
-            s0.run(bigBrain, self.ids.slider.value*2.55)
+            s0.run(bigBrain, self.ids.slider.value*5)
 
 
     def joy_update(self):
