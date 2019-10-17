@@ -14,15 +14,13 @@ from pidev.kivy import ImageButton
 from pidev.Joystick import Joystick
 
 from threading import Thread
-from time import sleep
 
 import spidev
 import os
-from time import sleep
 import RPi.GPIO as GPIO
 from pidev.stepper import stepper
+from time import sleep
 spi = spidev.SpiDev()
-
 
 MIXPANEL_TOKEN = "x"
 MIXPANEL = MixPanel("Project Name", MIXPANEL_TOKEN)
@@ -30,7 +28,6 @@ MIXPANEL = MixPanel("Project Name", MIXPANEL_TOKEN)
 SCREEN_MANAGER = ScreenManager()
 MAIN_SCREEN_NAME = 'main'
 ADMIN_SCREEN_NAME = 'admin'
-
 
 
 class ProjectNameGUI(App):
@@ -51,15 +48,17 @@ s0 = stepper(port=0, micro_steps=32, hold_current=20, run_current=20, accel_curr
              steps_per_unit=200, speed=8)
 
 
-
 class ImageScreen(Screen):
     def ret(self, widg):
         anim = Animation(size=(400, 400)) + Animation(size=(80, 80))
         anim.start(widg)
         SCREEN_MANAGER.current = MAIN_SCREEN_NAME
+
+
 ifMotorOn = False
 bigBrain = 0
 ultraBrain = 0.0
+
 
 class MainScreen(Screen):
     """
@@ -73,9 +72,9 @@ class MainScreen(Screen):
             s0.stop()
             s0.free()
             ifMotorOn = False
-        #runMotor just simply runs the motor if it is ready to go
+        # runMotor just simply runs the motor if it is ready to go
         else:
-            s0.run(bigBrain, self.ids.slider.value*5)
+            s0.run(bigBrain, self.ids.slider.value * 5)
             ifMotorOn = True
 
     def changeDirection(self):
@@ -84,18 +83,17 @@ class MainScreen(Screen):
         if ifMotorOn:
             if bigBrain == 0:
                 bigBrain = 1
-                s0.run(bigBrain, self.ids.slider.value*5)
+                s0.run(bigBrain, self.ids.slider.value * 5)
             else:
                 bigBrain = 0
-                s0.run(bigBrain, self.ids.slider.value*5)
+                s0.run(bigBrain, self.ids.slider.value * 5)
 
     def sliderMotorSpeed(self):
         global ultraBrain
         global ifMotorOn
         global bigBrain
         if ifMotorOn:
-            s0.run(bigBrain, self.ids.slider.value*5)
-
+            s0.run(bigBrain, self.ids.slider.value * 5)
 
     def joy_update(self):
         while True:
@@ -110,9 +108,7 @@ class MainScreen(Screen):
             self.ids.coords.text = "{:.3f} {:.3f}".format(jstick.get_axis('x'), jstick.get_axis('y'))
             sleep(.1)
 
-
-
-   # def start_joy_thread(self):
+    # def start_joy_thread(self):
     #    Thread(target=self.joy_update).start()
 
     def switch(self, curr):
@@ -138,6 +134,15 @@ class MainScreen(Screen):
         """
         PauseScreen.pause(pause_scene_name='pauseScene', transition_back_scene='main', text="Test", pause_duration=5)
 
+    def bestFunction(self):
+
+        s0.set_speed(1)
+        s0.relative_move(-15)
+        s0.stop()
+        sleep(10)
+        s0.set_speed(5)
+        s0.relative_move(-10)
+
     def admin_action(self):
         """
         Hidden admin button touch event. Transitions to passCodeScreen.
@@ -150,6 +155,7 @@ class MainScreen(Screen):
         anim = Animation(size=(600, 200)) + Animation(size=(300, 100))
         anim.start(widg)
         SCREEN_MANAGER.current = 'exit'
+
 
 
 class AdminScreen(Screen):
@@ -166,8 +172,10 @@ class AdminScreen(Screen):
         """
         Builder.load_file('AdminScreen.kv')
 
-        PassCodeScreen.set_admin_events_screen(ADMIN_SCREEN_NAME)  # Specify screen name to transition to after correct password
-        PassCodeScreen.set_transition_back_screen(MAIN_SCREEN_NAME)  # set screen name to transition to if "Back to Game is pressed"
+        PassCodeScreen.set_admin_events_screen(
+            ADMIN_SCREEN_NAME)  # Specify screen name to transition to after correct password
+        PassCodeScreen.set_transition_back_screen(
+            MAIN_SCREEN_NAME)  # set screen name to transition to if "Back to Game is pressed"
 
         super(AdminScreen, self).__init__(**kwargs)
 
@@ -197,6 +205,8 @@ class AdminScreen(Screen):
         spi.close()
         GPIO.cleanup()
         quit()
+
+
 """
 Widget additions
 """
