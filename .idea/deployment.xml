@@ -1,8 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="Always" serverName="pi@widget04.local" createEmptyFolders="true" exclude=".svn;.cvs;.idea;.DS_Store;.hg;*.hprof;*.pyc">
+  <component name="PublishConfigData" autoUpload="Always" serverName="pi@widget05.local" createEmptyFolders="true" exclude=".svn;.cvs;.idea;.DS_Store;.hg;*.hprof;*.pyc">
     <serverData>
-      <paths name="pi@widget04.local">
+      <paths name="Wired Raspberry Pi">
+        <serverdata>
+          <mappings>
+            <mapping local="$USER_HOME$/packages/RaspberryPiCommon" web="/" />
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="pi@pycharm-test-pi:22">
+        <serverdata>
+          <mappings>
+            <mapping local="$USER_HOME$/packages/RaspberryPiCommon" web="/" />
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="pi@widget05.local">
         <serverdata>
           <mappings>
             <mapping deploy="/home/pi/Documents/Ex-7-Hardware-Startup/Cooper" local="$PROJECT_DIR$" />

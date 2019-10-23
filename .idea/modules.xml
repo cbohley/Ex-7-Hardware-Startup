@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Ex-7-Hardware-Startup.iml" filepath="$PROJECT_DIR$/.idea/Ex-7-Hardware-Startup.iml" />
+      <module fileurl="file://$USER_HOME$/packages/RaspberryPiCommon/.idea/RaspberryPiCommon.iml" filepath="$USER_HOME$/packages/RaspberryPiCommon/.idea/RaspberryPiCommon.iml" />
     </modules>
   </component>
 </project>
